@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.dev.ems.dto.EmployeeDto;
 import net.dev.ems.service.EmployeeService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -31,13 +33,13 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long employeeId) {
+	public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") Long employeeId) {
 		EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
 		return ResponseEntity.ok(employeeDto);
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
+	public ResponseEntity<List<EmployeeDto>> getEmployees() {
 		List<EmployeeDto> employees = employeeService.getAllEmployees();
 		return ResponseEntity.ok(employees);
 	}
